@@ -45,29 +45,30 @@ class Task(models.Model):
     task_type = models.CharField(choices=TASK_TYPE_CHOICES, max_length=16)
 
     # Executable stuff
-    command_line = models.CharField(max_length=1024)
+    command_line = models.CharField(max_length=1024, blank=True)
 
     # AMQP stuff
-    amqp_connection = models.ForeignKey(AMQPConnection, models.RESTRICT)
-    queue_name = models.CharField(max_length=128)
+    amqp_connection = models.ForeignKey(AMQPConnection, models.RESTRICT, blank=True, null=True)
+    queue_name = models.CharField(max_length=128, blank=True)
 
 
 class Run(models.Model):
     task = models.ForeignKey(Task, on_delete=models.RESTRICT)
     start = models.DateTimeField()
-    stop = models.DateTimeField()
+    stop = models.DateTimeField(blank=True, null=True)
     successful = models.BooleanField()
-    error = models.TextField()
+    error = models.TextField(blank=True)
 
     # Executable stuff
-    stdout = models.TextField()
-    stderr = models.TextField()
-    return_code = models.IntegerField()
+    stdout = models.TextField(blank=True)
+    stderr = models.TextField(blank=True)
+    return_code = models.IntegerField(blank=True, null=True)
 
     # AMQP stuff
 
 
 class Argument(models.Model):
+    """ the actual value for a given parameter and a given run """
     run = models.ForeignKey(Run, on_delete=models.CASCADE)
     parameter = models.ForeignKey(Parameter, on_delete=models.RESTRICT)
-    value = models.CharField(max_length=1024)
+    value = models.CharField(max_length=1024, blank=True)

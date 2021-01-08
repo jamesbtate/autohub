@@ -1,0 +1,29 @@
+
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block title %}Automations{% endblock %}
+
+{% block content %}
+    <h1>Automations</h1>
+    <table class="table table-sm table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Triggers</th>
+                <th scope="col">Tasks</th>
+                <th scope="col">Runs</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for automation in automations %}
+                <th scope="row">{{ automation.id }}</th>
+                <td scope="row">{{ automation.name }}</td>
+                <td scope="row">unimplemented</td>
+                <td scope="row">{{ automation.task_set.count }}</td>
+                <td scope="row">unimplemented</td>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
