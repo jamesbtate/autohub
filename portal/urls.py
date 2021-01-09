@@ -23,4 +23,5 @@ urlpatterns = [
     path('about', views.about),
     path('automations', views.automations),
     path('runs', views.runs),
+    path('daemon_logs', views.daemon_logs),
 ]

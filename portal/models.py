@@ -72,3 +72,10 @@ class Argument(models.Model):
     run = models.ForeignKey(Run, on_delete=models.CASCADE)
     parameter = models.ForeignKey(Parameter, on_delete=models.RESTRICT)
     value = models.CharField(max_length=1024, blank=True)
+
+
+class DaemonLog(models.Model):
+    """ A log line from the backend daemon """
+    datetime = models.DateTimeField()
+    message = models.CharField(max_length=256)
+    level_name = models.CharField(max_length=16)

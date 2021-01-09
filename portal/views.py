@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from portal.models import AMQPConnection, Automation, Parameter
+from portal.models import AMQPConnection, Automation, Run, Parameter, DaemonLog
 
 
 def home(request):
@@ -17,3 +17,9 @@ def automations(request):
 
 def runs(request):
     pass
+
+
+def daemon_logs(request):
+    num_logs = 50
+    context = {'logs': DaemonLog.objects.order_by('-id')[:num_logs]}
+    return render(request, "daemon_logs.html", context)

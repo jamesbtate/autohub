@@ -1,0 +1,27 @@
+
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block title %}Daemon Logs{% endblock %}
+
+{% block content %}
+    <h1>Daemon Logs</h1>
+    <table class="table table-sm table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col" class="col-md-2">Datetime</th>
+                <th scope="col" class="col-md-1">Level</th>
+                <th scope="col">Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logs %}
+                <tr>
+                    <td scope="row" class="col-md-2">{{ log.datetime|date:"Y-m-d H:i:s.u" }}</td>
+                    <td scope="row" class="col-md-1">{{ log.level_name }}</td>
+                    <td scope="row">{{ log.message }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
